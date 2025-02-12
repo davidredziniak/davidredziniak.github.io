@@ -86,6 +86,11 @@
             text-align: center;
         }
 
+        .status h1 {
+            color: #f67280;
+            text-align: center;
+        }
+
         .status span {
             display: inline-block;
             /* Needed for centering */
@@ -103,6 +108,27 @@
             padding: 10px 0;
             margin: 0;
         }
+
+        .side-container button {
+            background: #ff6699;
+            /* Cute pink */
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .side-container button:hover {
+            background: #ff3366;
+        }
+
+        .song-name {
+            font-size: 14px;
+            color: #555;
+        }
     </style>
 </head>
 
@@ -113,9 +139,8 @@
 
     <div class="main-container">
         <div class="big-container">
-            <div class="time-row">
-                <h2>Current Time (EST):&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
-                <div class="time" id="current-time">Loading...</div>
+            <div class="status">
+                <h1>Valentine's Day soooooon!!!!</h1>
             </div>
             <div class="status">
                 <h2>Does David still love Molisa?</h2>
@@ -142,6 +167,17 @@
                 <h2>The David Countdown:</h2>
                 <div class="countdown" id="countdown">Loading...</div>
             </div>
+            <div class="side-container">
+                <button id="playPauseBtn" onclick="toggleMusic()">
+                    <span id="playIcon">▶️</span>
+                    <span id="pauseIcon" style="display: none;">⏸️</span>
+                </button>
+                <span class="song-name">Playing: Daniel Caesar - Best Part ft. H.E.R.</span>
+                <audio id="love-song" autoplay loop>
+                    <source src="audio.mp3" type="audio/mp3">
+                </audio>
+            </div>
+
         </div>
     </div>
 
@@ -168,8 +204,7 @@
         function updateCountdown() {
             const countdownElement = document.getElementById('countdown');
 
-            // Target date: January 31, 2025, 10:54 PM EST
-            const targetDate = new Date('2025-01-31T22:54:00-05:00'); // EST offset
+            const targetDate = new Date('2025-02-14T22:54:00-05:00'); // EST offset
 
             const now = new Date();
             const diff = targetDate - now;
@@ -194,6 +229,21 @@
 
         updateCountdown();
         updateTime();
+        function toggleMusic() {
+            const music = document.getElementById("love-song");
+            const playIcon = document.getElementById("playIcon");
+            const pauseIcon = document.getElementById("pauseIcon");
+
+            if (music.paused) {
+                music.play();
+                playIcon.style.display = "none";
+                pauseIcon.style.display = "inline";
+            } else {
+                music.pause();
+                playIcon.style.display = "inline";
+                pauseIcon.style.display = "none";
+            }
+        }
     </script>
 </body>
 
